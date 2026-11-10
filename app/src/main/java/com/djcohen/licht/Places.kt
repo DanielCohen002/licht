@@ -1,4 +1,4 @@
-package com.djcohen.candletile
+package com.djcohen.licht
 
 import android.content.Context
 import android.location.Geocoder

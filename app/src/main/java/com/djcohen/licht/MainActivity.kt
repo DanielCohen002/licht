@@ -1,4 +1,4 @@
-package com.djcohen.candletile
+package com.djcohen.licht
 
 import android.app.Activity
 import android.content.pm.PackageManager

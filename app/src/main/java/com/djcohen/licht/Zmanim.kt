@@ -1,4 +1,4 @@
-package com.djcohen.candletile
+package com.djcohen.licht
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat
@@ -31,7 +31,7 @@ data class Week(val friday: LocalDate, val fri: Times, val sat: Times, val sourc
 
 /** Where the user is, plus a per-day cache of Chabad.org results. */
 class Store(ctx: Context) {
-    private val sp = ctx.applicationContext.getSharedPreferences("candle", Context.MODE_PRIVATE)
+    private val sp = ctx.applicationContext.getSharedPreferences("licht", Context.MODE_PRIVATE)
 
     // Neutral default (New York) so the tile works before the first location fix.
     var zip: String
@@ -130,7 +130,7 @@ object Chabad {
         try {
             c.connectTimeout = 8000
             c.readTimeout = 10000
-            c.setRequestProperty("User-Agent", "Mozilla/5.0 (Android) CandleTile/1.0")
+            c.setRequestProperty("User-Agent", "Mozilla/5.0 (Android) Licht/1.0")
             if (c.responseCode != 200) throw IOException("HTTP ${c.responseCode}")
             val xml = c.inputStream.bufferedReader().use { it.readText() }
             if (!xml.contains("<rss")) throw IOException("unexpected document")
@@ -163,7 +163,7 @@ object Hebcal {
         try {
             c.connectTimeout = 8000
             c.readTimeout = 10000
-            c.setRequestProperty("User-Agent", "CandleTile/1.0 (Android)")
+            c.setRequestProperty("User-Agent", "Licht/1.0 (Android)")
             if (c.responseCode != 200) throw IOException("HTTP ${c.responseCode}")
             val body = JSONObject(c.inputStream.bufferedReader().use { it.readText() })
             val items = body.optJSONArray("items") ?: throw IOException("no items")

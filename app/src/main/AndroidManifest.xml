@@ -22,7 +22,7 @@
         </activity>
 
         <service
-            android:name=".CandleTileService"
+            android:name=".LichtTileService"
             android:exported="true"
             android:icon="@drawable/ic_tile"
             android:label="Licht"

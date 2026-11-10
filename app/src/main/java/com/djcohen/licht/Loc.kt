@@ -1,4 +1,4 @@
-package com.djcohen.candletile
+package com.djcohen.licht
 
 import android.annotation.SuppressLint
 import android.content.Context

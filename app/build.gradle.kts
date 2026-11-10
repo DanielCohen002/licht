@@ -14,15 +14,15 @@ val signingProps = Properties().apply {
 val canSign = listOf("STORE_FILE", "STORE_PASSWORD", "KEY_ALIAS", "KEY_PASSWORD").all { signingProps.getProperty(it) != null }
 
 android {
-    namespace = "com.djcohen.candletile"
+    namespace = "com.djcohen.licht"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.djcohen.candletile"
+        applicationId = "com.djcohen.licht"
         minSdk = 30
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
         ndk { abiFilters += listOf("arm64-v8a") }
     }
 

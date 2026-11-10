@@ -1,4 +1,4 @@
-package com.djcohen.candletile
+package com.djcohen.licht
 
 import android.app.PendingIntent
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 
 /** Quick Settings tile: next candle lighting and when Shabbos ends. Tap opens the weeks page. */
-class CandleTileService : TileService() {
+class LichtTileService : TileService() {
     private val main = Handler(Looper.getMainLooper())
 
     override fun onTileAdded() = render(null)
