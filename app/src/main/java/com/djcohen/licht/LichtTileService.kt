@@ -81,7 +81,12 @@ open class LichtTileService : TileService() {
         } else {
             tile.label = "Candles ${short(w.fri.candle)}"
             tile.subtitle = "Ends Sat ${short(w.sat.ends)}"
-            if (mini) tile.icon = Icon.createWithBitmap(timesIcon(short(w.fri.candle), short(w.sat.ends)))
+            if (mini) {
+                tile.icon = Icon.createWithBitmap(timesIcon(short(w.fri.candle), short(w.sat.ends)))
+                // A half-size tile hides the text, so this only shows if the mini tile is stretched to full size.
+                tile.label = "Use Licht tile"
+                tile.subtitle = "for full size"
+            }
         }
         tile.updateTile()
     }
