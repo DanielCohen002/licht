@@ -1,7 +1,9 @@
 package com.djcohen.licht
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.WindowInsets
 import android.window.OnBackInvokedDispatcher
@@ -182,5 +184,22 @@ class MainActivity : Activity() {
 
         @JavascriptInterface
         fun refreshLocation() = refreshLocationAsync()
+
+        @JavascriptInterface
+        fun version(): String =
+            try { packageManager.getPackageInfo(packageName, 0).versionName.orEmpty() } catch (e: Exception) { "" }
+
+        /** "Check for updates": asks GitHub when tapped and tells the page. Nothing is downloaded. */
+        @JavascriptInterface
+        fun checkUpdate() {
+            net.execute { push("window.__update(${Updater.check(version())})") }
+        }
+
+        /** Open one of this app's own GitHub pages in the browser; any other link is ignored. */
+        @JavascriptInterface
+        fun openUrl(url: String) {
+            if (!url.startsWith(Updater.LINK_PREFIX)) return
+            runOnUiThread { try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch (_: Exception) {} }
+        }
     }
 }

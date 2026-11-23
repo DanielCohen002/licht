@@ -173,6 +173,13 @@
     background: linear-gradient(90deg, var(--amber-deep), var(--amber));
   }
   .zip button:disabled { opacity: .5; }
+  .upd button {
+    width: 100%; padding: 13px 8px; border: 0; border-radius: 14px; font: 600 15px var(--sans); color: #2a1500;
+    background: linear-gradient(90deg, var(--amber-deep), var(--amber)); transition: opacity .2s ease, transform .15s ease;
+  }
+  .upd button:active { transform: scale(.98); }
+  .upd button:disabled { opacity: .5; }
+  #updMsg { margin: 8px 6px 0; min-height: 18px; font-size: 12.5px; color: var(--mute); }
   .opt.confirm { justify-content: space-between; border-color: rgba(255, 138, 120, .5); background: rgba(255, 90, 70, .08); }
   .opt.confirm span { flex: 1; min-width: 0; }
   .opt.confirm button { flex: none; padding: 9px 14px; border-radius: 12px; border: 0; font: 600 13px var(--sans); }
@@ -243,6 +250,11 @@
   </form>
   <div id="zipMsg"></div>
   <div id="results"></div>
+  <h4>About</h4>
+  <div class="upd">
+    <button id="updBtn" type="button">Check for updates</button>
+    <div id="updMsg"></div>
+  </div>
   <p style="margin:18px 0 4px;text-align:center;font-size:12px;opacity:.6">Licht is free software, GPL-3.0</p>
 </div>
 
@@ -260,6 +272,9 @@ if (!window.Android) {
     info: () => JSON.stringify({ src: window.__mock.src, place: window.__mock.place, manual: window.__mock.manual, zip: window.__mock.zip, saved: window.__mock.saved, today: iso(today), target: iso(nextFri) }),
     refreshLocation: () => {},
     sheet: () => {},
+    version: () => '1.0.3',
+    checkUpdate: () => setTimeout(() => window.__update({ state: 'available', current: '1.0.3', latest: '1.0.4', url: 'https://github.com/DanielCohen002/licht/releases/latest' }), 400),
+    openUrl: () => {},
     setSource: v => { window.__mock.src = v; setTimeout(() => window.__reload(), 100); },
     choose: (zip, label) => { window.__mock.manual = true; window.__mock.zip = zip; window.__mock.place = label; setTimeout(() => { window.__place(label); window.__reload(); }, 200); },
     useLocal: () => { window.__mock.manual = false; window.__mock.zip = '10001'; window.__mock.place = 'New York, NY 10001'; setTimeout(() => { window.__place('New York, NY 10001'); window.__reload(); }, 200); },
@@ -482,7 +497,22 @@ function renderResults() {
   $('#results').innerHTML = results.map((r, i) =>
     optHtml('result', {}, false, `${r.name}, ${r.state}`, r.zips.length ? 'ZIP ' + r.zips[0] : 'Find ZIP', `data-i="${i}"`)).join('');
 }
-function openSheet() { confirmZip = null; results = []; $('#results').innerHTML = ''; $('#zipMsg').textContent = ''; $('#zipIn').value = ''; renderSheet(); scrim.classList.add('show'); sheet.classList.add('show'); A.sheet(true); }
+function openSheet() { confirmZip = null; results = []; $('#results').innerHTML = ''; $('#zipMsg').textContent = ''; $('#zipIn').value = ''; resetUpdate(); renderSheet(); scrim.classList.add('show'); sheet.classList.add('show'); A.sheet(true); }
+function resetUpdate() {
+  const b = $('#updBtn'); b.disabled = false; b.textContent = 'Check for updates'; delete b.dataset.url;
+  $('#updMsg').style.color = 'var(--mute)'; $('#updMsg').textContent = 'Licht ' + A.version();
+}
+window.__update = r => {
+  const b = $('#updBtn'), m = $('#updMsg'); b.disabled = false; delete b.dataset.url; b.textContent = 'Check for updates';
+  if (r.state === 'available') { m.style.color = 'var(--ink)'; m.textContent = `Version ${r.latest} is available (you have ${r.current}).`; b.textContent = 'Download'; b.dataset.url = r.url; }
+  else if (r.state === 'uptodate') { m.style.color = 'var(--mute)'; m.textContent = `Licht ${r.current} is the latest version.`; }
+  else { m.style.color = '#ff9d8a'; m.textContent = "Couldn't check for updates. Are you online?"; }
+};
+$('#updBtn').onclick = () => {
+  const b = $('#updBtn');
+  if (b.dataset.url) { A.openUrl(b.dataset.url); return; }
+  b.disabled = true; $('#updMsg').style.color = 'var(--mute)'; $('#updMsg').textContent = 'Checking…'; A.checkUpdate();
+};
 function closeSheet() { scrim.classList.remove('show'); sheet.classList.remove('show'); $('#zipIn').blur(); A.sheet(false); }
 window.__closeSheet = closeSheet;
 window.__refreshSheet = () => { confirmZip = null; if (sheet.classList.contains('show')) renderSheet(); };
