@@ -40,3 +40,7 @@ then run `./gradlew assembleRelease`.
 - [Open-Meteo geocoding](https://open-meteo.com/en/docs/geocoding-api) for city search.
 
 Times are calculated for a ZIP code and are not a substitute for your local rabbi's guidance. Do not rely on them to the last minute.
+
+## License
+
+GPL-3.0. See [LICENSE](LICENSE). Free software: you can use, change and share it, and anything you share based on it must stay GPL-3.0 with its source available.
