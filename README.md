@@ -5,6 +5,7 @@
 Android app with a Quick Settings tile that shows the next Shabbos candle lighting and when Shabbos ends, plus a page of past and future weeks.
 
 - **Tile:** "Candles 4:22 / Ends Sat 5:22" for the nearest upcoming Friday and Saturday. It moves to the next week once Shabbos ends. Tap it to open the page.
+- **Mini tile:** "Licht mini" is a second tile for the half-size slot (Android 17 lets a tile take half the width). A half-size tile shows only its icon, so Licht mini draws the two times in the icon. If you stretch it to full size it says "Use Licht tile for full size". Android doesn't tell an app which size a tile is, so this is two tiles instead of one that switches.
 - **Page:** scrolling weeks with English and Hebrew dates, sunset and the weekly parsha. The upcoming week is highlighted.
 - **Times from:** Chabad.org's public zmanim feed (18 minutes before sunset, rounded) or Hebcal's Shabbat API, switchable in Settings. The parsha comes from Hebcal in both modes. If the network is down, the app falls back to a local sun calculation that matches Chabad's rules (candles 18 minutes before sunset, Shabbos ends at 8.5 degrees).
 - **Location:** follows your phone (coarse location, turned into a ZIP on the device), or pick a saved place, or search by US city or ZIP. Hold a saved place to remove it.
@@ -14,7 +15,7 @@ US places only, because Chabad.org times are looked up by ZIP code.
 
 ## Install
 
-Download the APK from the [Releases](../../releases) page and install it. Then add the tile: swipe down twice, tap the pencil, and drag "Licht" into your tiles.
+Download the APK from the [Releases](../../releases) page and install it. Then add the tile: swipe down twice, tap the pencil, and drag "Licht" (full size) or "Licht mini" (half size) into your tiles.
 
 ## Build
 
