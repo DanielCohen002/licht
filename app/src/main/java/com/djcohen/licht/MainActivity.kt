@@ -93,11 +93,22 @@ class MainActivity : Activity() {
             push("window.__reload()")
         }
 
+        /** Jerusalem only: true = candles 40 min before sunset, false = 18. */
         @JavascriptInterface
-        fun choose(zip: String, label: String, lat: Double, lon: Double) {
-            Store(applicationContext).choose(zip, label, lat, lon)
-            push("window.__place(${JSONObject.quote(label)})")
+        fun setJlm40(on: Boolean) {
+            Store(applicationContext).jlm40 = on
             push("window.__reload()")
+        }
+
+        @JavascriptInterface
+        fun choose(zip: String, label: String, lat: Double, lon: Double, cc: String, tz: String, cid: Int) {
+            net.execute {
+                // Saved places from before time zones were stored have none; look it up.
+                val zone = tz.ifBlank { if (zip == Chabad.JLM) "" else Places.tzFor(lat, lon) }
+                Store(applicationContext).choose(zip, label, lat, lon, cc.ifBlank { "US" }, zone, cid)
+                push("window.__place(${JSONObject.quote(label)})")
+                push("window.__reload()")
+            }
         }
 
         /** Go back to following the phone's location. */
@@ -130,8 +141,18 @@ class MainActivity : Activity() {
         @JavascriptInterface
         fun search(query: String, id: Int) {
             net.execute {
-                val out = try { Places.search(query).toString() } catch (e: Exception) { "null" }
+                val out = try { Places.search(applicationContext, query).toString() } catch (e: Exception) { "null" }
                 push("window.__results($id, $out)")
+            }
+        }
+
+        /** A non-US city picked from the search results (times come from Hebcal, or Chabad.org for Jerusalem). */
+        @JavascriptInterface
+        fun pickWorld(geo: String, label: String, lat: Double, lon: Double, cc: String, tz: String, cid: Int) {
+            net.execute {
+                val place = Places.selectWorld(applicationContext, geo.toLong(), label, lat, lon, cc, tz, cid)
+                push("window.__place(${JSONObject.quote(place)})")
+                push("window.__reload()")
             }
         }
 
@@ -158,6 +179,17 @@ class MainActivity : Activity() {
             }
         }
 
+        /** A short note when the chosen place is in a different time zone than the phone, else "". */
+        private fun tzNote(s: Store): String {
+            if (!s.manual) return ""
+            val now = java.time.Instant.now()
+            val there = s.zone.rules.getOffset(now)
+            val here = java.time.ZoneId.systemDefault().rules.getOffset(now)
+            if (there == here) return ""
+            fun gmt(o: java.time.ZoneOffset) = "GMT" + o.id.replace("Z", "").let { if (it.isEmpty()) "" else it.replace(Regex(":00$"), "").replace(Regex("([+-])0"), "$1") }
+            return "Times are in ${s.label.substringBefore(",")} time (${gmt(there)}), not your phone's time zone (${gmt(here)})."
+        }
+
         @JavascriptInterface
         fun info(): String {
             val s = Store(applicationContext)
@@ -165,9 +197,13 @@ class MainActivity : Activity() {
                 .put("manual", s.manual)
                 .put("src", s.src)
                 .put("zip", s.zip)
+                .put("jlm", s.inJerusalem())
+                .put("jlm40", s.jlm40)
+                .put("tzNote", tzNote(s))
+                .put("chabad", !s.manual || s.zip.matches(Regex("\\d{5}")) || s.zip == Chabad.JLM || s.cid > 0)
                 .put("saved", org.json.JSONArray(s.saved))
                 .put("place", s.label)
-                .put("today", LocalDate.now().toString())
+                .put("today", LocalDate.now(s.zone).toString())
                 .put("target", Weeks.targetFriday(applicationContext).toString())
                 .toString()
         }

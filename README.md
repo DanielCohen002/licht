@@ -8,10 +8,11 @@ Android app with a Quick Settings tile that shows the next Shabbos candle lighti
 - **Mini tile:** "Licht mini" is a second tile for the half-size slot (Android 17 lets a tile take half the width). A half-size tile shows only its icon, so Licht mini draws the two times in the icon. If you stretch it to full size it says "Use Licht tile for full size". Android doesn't tell an app which size a tile is, so this is two tiles instead of one that switches.
 - **Page:** scrolling weeks with English and Hebrew dates, sunset and the weekly parsha. The upcoming week is highlighted.
 - **Times from:** Chabad.org's public zmanim feed (18 minutes before sunset, rounded) or Hebcal's Shabbat API, switchable in Settings. The parsha comes from Hebcal in both modes. If the network is down, the app falls back to a local sun calculation that matches Chabad's rules (candles 18 minutes before sunset, Shabbos ends at 8.5 degrees).
-- **Location:** follows your phone (coarse location, turned into a ZIP on the device), or pick a saved place, or search by US city or ZIP. Hold a saved place to remove it.
+- **Jerusalem:** candles are 40 minutes before sunset there, which is what both sources give. A Settings option switches between 40 and 18 minutes.
+- **Location:** follows your phone (coarse location, turned into a ZIP on the device), or pick a saved place, or search by city anywhere in the world or by US ZIP. Hold a saved place to remove it. Cities outside the US use Chabad.org when it lists them (about 900 non-US cities, matched by name) and Hebcal otherwise. If a place is in a different time zone than your phone, a note says the times are in that place's time.
 - **Private:** only the INTERNET and coarse location permissions. No account, no analytics.
 
-US places only, because Chabad.org times are looked up by ZIP code.
+ZIP codes are US only.
 
 ## Install
 

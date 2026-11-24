@@ -66,6 +66,19 @@ class Store(ctx: Context) {
         sp.edit().putString("h:$zip:$friday", o.toString()).apply()
     }
 
+    /** Jerusalem lights candles 40 minutes before sunset (custom of the city); everywhere else it is 18. On by default. */
+    var jlm40: Boolean
+        get() = sp.getBoolean("jlm40", true)
+        set(v) = sp.edit().putBoolean("jlm40", v).apply()
+
+    /** True when the current place is in Jerusalem (Israel, within about 14 km of the city centre). */
+    fun inJerusalem(): Boolean {
+        if (country != "IL") return false
+        val d = FloatArray(1)
+        android.location.Location.distanceBetween(lat, lon, 31.7767, 35.2345, d)
+        return d[0] < 14000f
+    }
+
     /** True when the user picked a place by hand; the phone's location is then ignored. */
     var manual: Boolean
         get() = sp.getBoolean("manual", false)
@@ -86,15 +99,29 @@ class Store(ctx: Context) {
         val z = sp.getString("a_zip", null) ?: return
         sp.edit().putString("zip", z).putString("country", sp.getString("a_country", "US"))
             .putString("label", sp.getString("a_label", label)).putString("lat", sp.getString("a_lat", lat.toString()))
-            .putString("lon", sp.getString("a_lon", lon.toString())).apply()
+            .putString("lon", sp.getString("a_lon", lon.toString())).putString("tz", "").putInt("cid", 0).apply()
     }
 
-    fun choose(zip: String, label: String, lat: Double, lon: Double) {
+    /**
+     * [zip] is a 5-digit US ZIP, "JLM" (Jerusalem) or "g<GeoNames id>" for any other city in the world.
+     * [tz] is the place's time zone id (blank = the phone's own).
+     */
+    fun choose(zip: String, label: String, lat: Double, lon: Double, country: String = "US", tz: String = "", cid: Int = 0) {
         if (!manual) saveAuto()
-        sp.edit().putString("zip", zip).putString("country", "US").putString("label", label)
+        sp.edit().putString("zip", zip).putString("country", if (zip == Chabad.JLM) "IL" else country).putString("label", label)
             .putString("lat", lat.toString()).putString("lon", lon.toString())
+            .putString("tz", if (zip == Chabad.JLM) "Asia/Jerusalem" else tz)
+            .putInt("cid", cid)
             .putBoolean("manual", true).apply()
     }
+
+    /** Chabad.org's own city number for the chosen non-US place, or 0 when Chabad has no listing for it. */
+    val cid: Int get() = sp.getInt("cid", 0)
+
+    /** Time zone of the chosen place; the phone's own when blank or unknown. */
+    val zone: ZoneId
+        get() = try { sp.getString("tz", "")!!.takeIf { it.isNotBlank() }?.let { ZoneId.of(it) } } catch (e: Exception) { null }
+            ?: ZoneId.systemDefault()
 
     fun getDay(zip: String, d: LocalDate): Times? {
         val raw = sp.getString("d:$zip:$d", null) ?: return null
@@ -112,6 +139,9 @@ class Store(ctx: Context) {
 
 /** Chabad.org's public zmanim RSS feed (the same numbers as chabad.org/zmanim). */
 object Chabad {
+    /** Pseudo-ZIP meaning "Jerusalem" (Chabad location 247, Hebcal geonameid 281184). */
+    const val JLM = "JLM"
+
     private const val T = "(\\d{1,2}:\\d{2}\\s*[AP]M)"
     private val candleRe = Regex("<title>\\s*Candle Lighting[^<]*?-\\s*$T", RegexOption.IGNORE_CASE)
     private val sunsetRe = Regex("<title>\\s*Sunset[^<]*?-\\s*$T", RegexOption.IGNORE_CASE)
@@ -123,7 +153,8 @@ object Chabad {
     /** Returns the day's times and Chabad's name for the place. Throws on any network/parse problem. */
     fun fetch(zip: String, d: LocalDate): Pair<Times, String?> {
         val url = URL(
-            "https://www.chabad.org/tools/rss/zmanim.xml?locationid=$zip&locationtype=2" +
+            "https://www.chabad.org/tools/rss/zmanim.xml?" +
+                (if (zip == JLM) "locationid=247&locationtype=1" else if (zip.startsWith("c")) "locationid=${zip.drop(1)}&locationtype=1" else "locationid=$zip&locationtype=2") +
                 "&tdate=${d.monthValue}/${d.dayOfMonth}/${d.year}"
         )
         val c = url.openConnection() as HttpURLConnection
@@ -146,17 +177,55 @@ object Chabad {
     }
 }
 
+/** Chabad.org's list of non-US cities (assets/chabad_cities.tsv: id, city, region), matched to search results by name. */
+object ChabadCities {
+    private class Row(val id: Int, val city: String, val region: String)
+    @Volatile private var rows: List<Row>? = null
+
+    private fun norm(s: String): String =
+        java.text.Normalizer.normalize(s.lowercase(Locale.US).replace("&", "and"), java.text.Normalizer.Form.NFD)
+            .replace(Regex("[^a-z0-9]"), "")
+
+    private fun table(ctx: Context): List<Row> {
+        rows?.let { return it }
+        val t = try {
+            ctx.assets.open("chabad_cities.tsv").bufferedReader().useLines { ls ->
+                ls.mapNotNull { l ->
+                    val p = l.split("	")
+                    val id = p.getOrNull(0)?.toIntOrNull()
+                    if (p.size == 3 && id != null) Row(id, norm(p[1]), norm(p[2])) else null
+                }.toList()
+            }
+        } catch (e: Exception) { emptyList() }
+        rows = t
+        return t
+    }
+
+    /** Chabad's id for a place like "Paris" / "Île-de-France" / "France", or 0 if Chabad does not list it. */
+    fun find(ctx: Context, name: String, admin1: String, country: String): Int {
+        val n = norm(name)
+        if (n.length < 3) return 0
+        val a = norm(admin1)
+        val c = norm(country)
+        val hits = table(ctx).filter { r ->
+            (r.city == n || (n.length >= 4 && r.city.startsWith(n))) &&
+                ((c.isNotEmpty() && r.region.contains(c)) || (a.length >= 3 && r.region.contains(a)))
+        }
+        return (hits.firstOrNull { it.city == n } ?: hits.firstOrNull())?.id ?: 0
+    }
+}
+
 /** Hebcal's free Shabbat API (candle lighting, Havdalah at 8.5 degrees, and the Torah portion). */
 object Hebcal {
-    private fun t12(s: String): String? {
-        val m = Regex("(\\d{1,2}:\\d{2})\\s*([ap]m)", RegexOption.IGNORE_CASE).find(s) ?: return null
-        return "${m.groupValues[1]} ${m.groupValues[2].uppercase(Locale.US)}"
-    }
+    /** Local time from the item's ISO date ("2026-11-27T15:55:00+02:00"), shown as "3:55 PM". */
+    private fun t12(date: String): String? =
+        try { LocalTime.parse(date.substring(11, 16)).format(DateTimeFormatter.ofPattern("h:mm a", Locale.US)) } catch (e: Exception) { null }
 
     /** One Shabbos for the Friday [friday]. Throws on any network or parse problem. */
     fun fetch(zip: String, friday: LocalDate): JSONObject {
         val url = URL(
-            "https://www.hebcal.com/shabbat?cfg=json&zip=$zip&M=on" +
+            "https://www.hebcal.com/shabbat?cfg=json&" +
+                (if (zip == Chabad.JLM) "geonameid=281184" else if (zip.startsWith("g")) "geonameid=${zip.drop(1)}" else "zip=$zip") + "&M=on" +
                 "&gy=${friday.year}&gm=${friday.monthValue}&gd=${friday.dayOfMonth}"
         )
         val c = url.openConnection() as HttpURLConnection
@@ -173,8 +242,8 @@ object Hebcal {
                 val it = items.getJSONObject(i)
                 val date = it.optString("date")
                 when (it.optString("category")) {
-                    "candles" -> if (date.startsWith(friday.toString())) t12(it.optString("title"))?.let { t -> out.put("c", t) }
-                    "havdalah" -> if (date.startsWith(sat)) t12(it.optString("title"))?.let { t -> out.put("e", t) }
+                    "candles" -> if (date.startsWith(friday.toString())) t12(date)?.let { t -> out.put("c", t) }
+                    "havdalah" -> if (date.startsWith(sat)) t12(date)?.let { t -> out.put("e", t) }
                     "parashat" -> if (date.startsWith(sat)) out.put("p", it.optString("title").removePrefix("Parashat ").removePrefix("Parshas "))
                 }
             }
@@ -185,7 +254,7 @@ object Hebcal {
     }
 }
 
-/** Offline fallback: NOAA sun position with Chabad's rules (candles 18 min before sunset, Shabbos ends at 8.5 degrees). */
+/** Offline fallback: NOAA sun position with Chabad's rules (candles 18 min before sunset, 40 in Jerusalem, Shabbos ends at 8.5 degrees). */
 object Solar {
     private fun rad(d: Double) = d * PI / 180.0
     private fun deg(r: Double) = r * 180.0 / PI
@@ -226,13 +295,13 @@ object Solar {
         return "%d:%02d %s".format(Locale.US, h12, ((r % 60) + 60) % 60, if (h24 >= 12) "PM" else "AM")
     }
 
-    fun day(date: LocalDate, lat: Double, lon: Double): Times {
-        val offMin = ZoneId.systemDefault().rules.getOffset(date.atTime(12, 0).atZone(ZoneId.systemDefault()).toInstant())
+    fun day(date: LocalDate, lat: Double, lon: Double, candleMin: Int = 18, zone: ZoneId = ZoneId.systemDefault()): Times {
+        val offMin = zone.rules.getOffset(date.atTime(12, 0).atZone(zone).toInstant())
             .totalSeconds / 60.0
         val sunset = event(date, lat, lon, -0.833, true)
         val ends = event(date, lat, lon, -8.5, true)
         return Times(
-            sunset?.let { fmt(it - 18 + offMin) },
+            sunset?.let { fmt(it - candleMin + offMin) },
             sunset?.let { fmt(it + offMin) },
             ends?.let { fmt(it + offMin) },
         )
@@ -245,14 +314,25 @@ object Weeks {
     fun parseTime(s: String?): LocalTime? =
         try { if (s == null) null else LocalTime.parse(s, parse12) } catch (e: Exception) { null }
 
+    /** [t] ("4:36 PM") minus [m] minutes, in the same format; null if [t] is missing. */
+    private fun minus(t: String?, m: Int): String? =
+        parseTime(t)?.minusMinutes(m.toLong())?.format(parse12)?.uppercase(Locale.US)
+
     /** Loads one Shabbos. [net] lets it call Chabad.org for days not cached yet; otherwise it only reads the cache. */
     fun load(ctx: Context, friday: LocalDate, net: Boolean): Week {
         val s = Store(ctx)
         val sat = friday.plusDays(1)
-        val calcFri = Solar.day(friday, s.lat, s.lon)
-        val calcSat = Solar.day(sat, s.lat, s.lon)
-        if (s.src == "hebcal" && s.country == "US" && s.zip.matches(Regex("\\d{5}"))) {
-            val zip = s.zip
+        val jlm = s.inJerusalem()
+        val usZip = s.country == "US" && s.zip.matches(Regex("\\d{5}"))
+        // A city picked from the worldwide search: only Hebcal covers these (Chabad.org needs a ZIP or its own city list).
+        val world = !jlm && !usZip && s.manual && s.zip.matches(Regex("g\\d+"))
+        val lead = if (jlm && s.jlm40) 40 else 18
+        val calcFri = Solar.day(friday, s.lat, s.lon, lead, s.zone)
+        val calcSat = Solar.day(sat, s.lat, s.lon, 18, s.zone)
+        val cid = if (world) s.cid else 0
+        val hebKey = if (jlm) Chabad.JLM else s.zip
+        if ((s.src == "hebcal" && (jlm || usZip || world)) || (world && cid == 0)) {
+            val zip = hebKey
             var h = s.getHebcal(zip, friday)
             if (h == null && net) {
                 try { h = Hebcal.fetch(zip, friday); s.putHebcal(zip, friday, h) } catch (e: Exception) { /* fall back below */ }
@@ -261,14 +341,15 @@ object Weeks {
                 // Hebcal does not list sunset, so show the calculated one (within a minute).
                 return Week(
                     friday,
-                    Times(h.optString("c"), calcFri.sunset, null),
+                    // Hebcal's own candle time is 40 min in Jerusalem; with the option off use 18 before sunset.
+                    Times(if (jlm && !s.jlm40) minus(calcFri.sunset, 18) else h.optString("c"), calcFri.sunset, null),
                     Times(null, calcSat.sunset, h.optString("e").ifEmpty { calcSat.ends }),
                     "hebcal",
                     h.optString("p").ifEmpty { null },
                 )
             }
-        } else if (s.country == "US" && s.zip.matches(Regex("\\d{5}"))) {
-            val zip = s.zip
+        } else if (jlm || usZip || world) {
+            val zip = if (jlm) Chabad.JLM else if (world) "c$cid" else s.zip
             var f = s.getDay(zip, friday)
             var a = s.getDay(zip, sat)
             if (net) {
@@ -276,7 +357,7 @@ object Weeks {
                     if (f == null) {
                         val (t, place) = Chabad.fetch(zip, friday)
                         if (t.candle != null) { s.putDay(zip, friday, t); f = t }
-                        if (place != null && zip == s.zip) s.label = place
+                        if (place != null && !jlm && zip == s.zip) s.label = place
                     }
                     if (a == null) {
                         val (t, _) = Chabad.fetch(zip, sat)
@@ -284,7 +365,9 @@ object Weeks {
                     }
                 } catch (e: Exception) { /* fall through to the calculation */ }
             }
-            if (f != null && a != null) return Week(friday, f, a, "chabad", parshaFor(s, zip, friday, net))
+            // Chabad's own candle time is 40 min in Jerusalem; with the option off use 18 before sunset.
+            if (jlm && !s.jlm40 && f != null) f = Times(minus(f.sunset, 18) ?: f.candle, f.sunset, f.ends)
+            if (f != null && a != null) return Week(friday, f, a, "chabad", parshaFor(s, hebKey, friday, net))
         }
         return Week(friday, calcFri, calcSat, "calc")
     }
@@ -299,7 +382,8 @@ object Weeks {
     }
 
     /** The Friday of the nearest upcoming Shabbos (the current one stays until Shabbos ends). */
-    fun targetFriday(ctx: Context, now: LocalDateTime = LocalDateTime.now()): LocalDate {
+    /** [now] is the clock time in the chosen place's own time zone, since Shabbos-end is a time there. */
+    fun targetFriday(ctx: Context, now: LocalDateTime = LocalDateTime.now(Store(ctx).zone)): LocalDate {
         val today = now.toLocalDate()
         return when (today.dayOfWeek) {
             DayOfWeek.FRIDAY -> today

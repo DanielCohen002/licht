@@ -1,0 +1,925 @@
+1	Aberdeen	Scotland
+4	Acapulco	Mexico
+5	Adelaide	South Australia Australia
+6	Ahmadãbãd	India
+10	Alexandria	Egypt
+12	Algiers	Algeria
+14	Allahabad	India
+18	Amman	Jordan
+19	Amsterdam	Netherlands
+21	Ankara	Turkey
+24	Antwerp	Belgium
+27	Asuncion	Paraguay
+29	Athens	Greece
+32	Auckland	New Zealand
+37	Baghdad	Iraq
+39	Bali	Indonesia
+41	Bangalore	India
+42	Bangkok	Thailand
+44	Barcelona	Spain
+49	Beirut	Lebanon
+50	Belém	Brazil
+51	Belfast	Northern Ireland
+52	Belgrade	Serbia
+53	Belleville	Ontario Canada
+56	Berlin	Germany
+62	Birmingham	England
+66	Bogotá	Colombia
+68	Mumbai	India
+69	Bonn	Germany
+70	Bordeaux	France
+74	Brandon	Manitoba Canada
+75	Brantford	Ontario Canada
+76	Brasília	Brazil
+78	Bremen	Germany
+80	Brisbane	Queensland Australia
+81	Bristol	England
+86	Brussels	Belgium
+87	Bucharest	Romania
+88	Budapest	Hungary
+90	Buenos Aires	Buenos Aires Argentina
+92	Burlington	Ontario Canada
+95	Cairo	Egypt
+96	Calcutta	India
+97	Calgary	Alberta Canada
+99	Cali	Colombia
+101	Canton	China
+104	Cape Town	South Africa
+105	Caracas	Venezuela
+108	Cartagena	Colombia
+109	Casablanca	Morocco
+110	Cayenne	French Guiana
+114	Changchun	China
+121	Chihuahua	Mexico
+122	Chongquing	China
+123	Churchill	Manitoba Canada
+126	Cologne	Germany
+127	Colombo	Sri Lanka
+134	Copenhagen	Denmark
+135	Córdoba	Córdoba Argentina
+138	Dakar	Senegal
+140	Tindal	Northern Territory Australia
+142	Dawson	Yukon Canada
+146	Delhi	India
+150	Djibouti	Djibouti
+153	Dresden	Germany
+154	Dublin	Ireland
+157	Durban	South Africa
+159	Düsseldorf	Germany
+162	Edinburgh	Scotland
+163	Edmonton	Alberta Canada
+168	Essen	Germany
+177	Florence	Italy
+182	Frankfurt	Germany
+189	Gdan'sk	Poland
+190	Geneva	Switzerland
+191	Genoa	Italy
+192	Georgetown	Guyana
+193	Glasgow	Scotland
+200	Guadalajara	Mexico
+201	Guam	Guam
+202	Guatemala City	Guatemala
+203	Guayaquil	Ecuador
+204	Guelph	Ontario Canada
+206	Halifax	Nova Scotia Canada
+207	Hamburg	Germany
+208	Hamilton	Ontario Canada
+210	Hammerfest	Norway
+211	Hannover	Germany
+212	Hanoi	Vietnam
+215	Havana	Cuba
+219	Helsinki	Finland
+221	Hiroshima	Japan
+222	Hobart	Tasmania Australia
+223	Ho Chi Minh City	Vietnam
+226	Hong Kong	China
+229	Hull	Quebec Canada
+232	Hyderãbãd	India
+233	Hyderabad	Pakistan
+238	Iquique	Tarapacá Chile
+239	Irbid	Jordan
+240	Irkutsk	Russia
+244	Jakarta	Indonesia
+247	Jerusalem	Israel
+248	Johannesburg	South Africa
+252	Kabul	Afghanistan
+254	Kampala	Uganda
+255	Kanpur	India
+258	Karachi	Pakistan
+259	Kathmandu	Nepal
+262	Khartoum	Sudan
+263	Kyiv	Ukraine
+265	Kingston	Jamaica
+266	Kingston	Ontario Canada
+267	Kinshasa	Democratic Republic of the Congo
+268	Kitchener	Ontario Canada
+269	Kitwe	Zambia
+272	Kobe	Japan
+273	Kowloon	Hong Kong China
+274	Kraków	Poland
+275	Kuala Lumpur	Malaysia
+276	Kuwait	Kuwait
+277	Kyoto	Japan
+281	La Paz	Bolivia
+284	La Salle	Quebec Canada
+286	Laval	Quebec Canada
+288	Leeds	England
+289	Leipzig	Germany
+291	Lethbridge	Alberta Canada
+295	Lima	Peru
+297	Lisbon	Portugal
+299	Liverpool	England
+300	London	England
+301	London	Ontario Canada
+308	Lucknow	India
+309	Luxembourg	Luxembourg
+310	Lyon	France
+313	Madras	India
+314	Madrid	Spain
+315	Managua	Nicaragua
+316	Manchester	England
+320	Manila	Philippines
+321	Mannheim	Germany
+322	Marseille	France
+324	Mazatlán	Mexico
+325	Mecca	Saudi Arabia
+326	Medellin	Colombia
+327	Melbourne	Victoria Australia
+330	Mexico City	Mexico
+332	Milan	Italy
+336	Minsk	Belarus
+337	Mississauga	Ontario Canada
+339	Mogadishu	Somalia
+342	Montevideo	Uruguay
+345	Montreal	Quebec Canada
+346	Moose Jaw	Saskatchewan Canada
+347	Moscow	Russia
+349	Munich	Germany
+351	Nagasaki	Japan
+352	Nagoya	Japan
+353	Nãgpur	India
+354	Nairobi	Kenya
+355	Nanjing	China
+356	Napoli	Italy
+358	Naples	Italy
+365	Newcastle upon Tyne	England
+366	New Delhi	India
+372	Niagara Falls	Ontario Canada
+375	North Bay	Ontario Canada
+376	Nuremberg	Germany
+378	Odessa	Ukraine
+384	Osaka	Japan
+385	Oshawa	Ontario Canada
+386	Oslo	Norway
+387	Ottawa	Ontario Canada
+389	Palermo	Italy
+392	Panama City	Panama
+393	Paramaribo	Suriname
+394	Paris	France
+397	Beijing	China
+401	Perth	Western Australia Australia
+402	Peterborough	Ontario Canada
+404	Phnom Penh	Cambodia
+409	Plymouth	England
+412	Port-au-Prince	Haiti
+413	Port of Spain	Trinidad & Tobago
+416	Port Louis	Mauritius
+417	Port Moresby	Papua New Guinea
+421	Prague	Czech Republic
+422	Pretoria	South Africa
+423	Prince Rupert	British Columbia Canada
+428	Pune	India
+429	Quarte-Bornes	Mauritius
+430	Quebec City	Quebec Canada
+437	Regina	Saskatchewan Canada
+439	Reykjavik	Iceland
+442	Rio de Janeiro	Brazil
+443	Riyadh	Saudi Arabia
+449	Rome	Italy
+450	Rotterdam	Netherlands
+453	Saigon	Vietnam
+454	St. Catharines	Ontario Canada
+456	St. John	New Brunswick Canada
+457	St. John's	Newfoundland and Labrador Canada
+462	St. Petersburg	Russia
+467	Salzburg	Austria
+468	Salvador	Brazil
+475	San Juan	Puerto Rico
+476	São Paulo	Brazil
+478	San Salvador	El Salvador
+482	Santiago	Santiago Metropolitan Region Chile
+484	Sarajevo	Bosnia and Hercegovina
+485	Saskatoon	Saskatchewan Canada
+486	Sault Ste. Marie	Ontario Canada
+491	Seoul	South Korea
+492	Seville	Spain
+493	Shanghai	China
+495	Sheffield	England
+499	Singapore	Singapore
+502	Sofia	Bulgaria
+514	Stockholm	Sweden
+518	Sudbury	Ontario Canada
+523	Sydney	New South Wales Australia
+524	Sydney	Nova Scotia Canada
+529	Antananarivo	Madagascar
+530	Tehran	Iran
+531	Tel Aviv-Yafo	Israel
+535	The Hague	Netherlands
+536	Thunder Bay	Ontario Canada
+537	Tokyo	Japan
+540	Toronto	Ontario Canada
+542	Tripoli	Libya
+543	Trois-Rivieres	Quebec Canada
+547	Tunis	Tunisia
+548	Turin	Italy
+554	Valencia	Spain
+555	Valletta	Malta
+556	Valparaiso	Valparaíso Chile
+557	Vancouver	British Columbia Canada
+558	Varna	Bulgaria
+559	Vatican City	Vatican City
+561	Venice	Italy
+563	Veracruz	Mexico
+564	Victoria	British Columbia Canada
+565	Vienna	Austria
+566	Vladivostok	Russia
+570	Warsaw	Poland
+574	Wellington	New Zealand
+578	Whitehorse	Yukon Canada
+585	Windhoek	Namibia
+586	Windsor	Ontario Canada
+587	Winnipeg	Manitoba Canada
+591	Wroclaw	Poland
+592	Wuhan	China
+593	Wuppertal	Germany
+594	Xinfu	China
+595	Xi'an	China
+597	Xuzhou	China
+599	Yamoussoukro	Cote d'Ivoire
+600	Yangon	Myanmar
+601	Yellowknife	Northwest Territory Canada
+606	Zagreb	Croatia
+608	Al Zarqa	Jordan
+610	Zhengzhou	China
+611	Zurich	Switzerland
+612	Khania - Island of Crete	Greece
+614	Istanbul	Turkey
+615	Puerto Vallarta	Mexico
+616	Nassau	Bahamas
+617	Hamilton	Bermuda
+618	Santa Cruz	Bolivia
+619	Freeport	Bahamas
+620	Oranjestad	Aruba
+621	San Jose	Costa Rica
+622	George Town	Cayman Islands
+623	Vilnius	Lithuania
+624	Tallinn	Estonia
+625	Gothenburg	Sweden
+626	Tegucigalpa	Honduras
+628	Ljubljana	Slovenia
+629	Lucerne	Switzerland
+630	Cheshire	England
+631	Bahía Blanca	Buenos Aires Argentina
+632	Riga	Latvia
+633	Moncton	New Brunswick Canada
+634	Oxford	England
+635	Pontault Combault	France
+636	Stuttgart	Germany
+637	Almere	Netherlands
+638	Toulouse	France
+640	Cambridge	England
+641	Umhlanga Rocks	South Africa
+642	Gustavia	Saint Barthélemy France
+643	Philipsburg	Sint Maarten
+645	Modi'in-Maccabim-Re'ut	Israel
+646	Porto Alegre	Brazil
+647	Accra	Ghana
+648	Lagos	Nigeria
+649	Luanda	Angola
+650	Asmera	Eritrea
+651	Yaoundé	Cameroon
+652	Banjul	Gambia
+653	Addis Ababa	Ethiopia
+654	Libreville	Gabon
+655	Port-Gentil	Gabon
+656	Abuja	Nigeria
+657	Abidjan	Ivory Coast
+658	Mombasa	Kenya
+659	Kananga	Democratic Republic of the Congo
+660	Mbuji-Mayi	Democratic Republic of the Congo
+661	Lubumbashi	Democratic Republic of the Congo
+662	Freetown	Sierra Leone
+663	Kigali	Rwanda
+664	Entebbe	Uganda
+665	Bamako	Mali
+666	Tshikapa	Democratic Republic of the Congo
+667	Kisangani	Democratic Republic of the Congo
+668	Lusaka	Zambia
+671	Larnaca	Cyprus
+672	Thornhill	Ontario Canada
+674	Brighton	England
+675	Bournemouth	England
+676	Fes	Morocco
+677	Nice	France
+678	Cannes	France
+679	Monte Carlo	Monaco
+680	Marbella	Spain
+681	Tashkent	Uzbekistan
+682	Leicester	England
+684	Chiang Mai	Thailand
+685	Ko Samui	Thailand
+686	Chișinău	Moldova
+687	Eilat	Israel
+688	Be'er Sheva	Israel
+689	Haifa	Israel
+690	Hebron	Israel
+691	Jericho	Israel
+692	Karnei Shomron	Israel
+694	Netanya	Israel
+695	Tzefat	Israel
+696	Shchem	Israel
+697	Tiberias	Israel
+698	Akko	Israel
+699	Ashdod	Israel
+700	Ashkelon	Israel
+701	Bnei Brak	Israel
+702	Kiryat Gat	Israel
+703	Rehovot	Israel
+704	Kfar Chabad	Israel
+706	Northampton	England
+707	Lille	France
+708	Yerevan	Armenia
+709	Brest	Belarus
+711	Nanaimo	British Columbia Canada
+712	Quito	Ecuador
+713	Cancún	Mexico
+714	Richmond	British Columbia Canada
+715	St Ives	New South Wales Australia
+716	Bratislava	Slovakia
+718	Malmö	Sweden
+719	Bergen	Norway
+720	Trondheim	Norway
+721	Kristiansand	Norway
+722	Stavanger	Norway
+723	Vientiane	Laos
+724	Grodno	Belarus
+726	Haarlem	Netherlands
+727	Cardiff	Wales
+728	Guangzhou	China
+729	Malaga	Spain
+730	Torremolinos	Spain
+731	Gibraltar	Gibraltar
+732	Estepona	Spain
+733	Primorsk	Ukraine
+734	Lugansk	Ukraine
+735	Mont-Tremblant	Quebec Canada
+736	Antalya	Turkey
+737	Maracaibo	Venezuela
+738	Maturin	Venezuela
+739	Roseau	Dominica
+740	Kemerovo	Russia
+741	Tenerife - Canary Islands	Spain
+742	Baku	Azerbaijan
+743	Nottingham	England
+744	Gush Etzion	Israel
+745	Maastricht	Netherlands
+746	Rosario	Santa Fe Argentina
+747	Aurora	Ontario Canada
+748	Fuerteventura - Canary Islands	Spain
+749	Offenbach	Germany
+750	Monterrey	Mexico
+751	Santo Domingo	Dominican Republic
+752	Almaty	Kazakhstan
+755	Cochabamba	Bolivia
+756	Beit Shemesh	Israel
+759	Strasbourg	France
+760	Rouen	France
+762	Narvik	Norway
+763	Boda	Norway
+764	Geiranger	Norway
+765	Lillehammer	Norway
+766	Tromsø	Norway
+767	Honningsvåg	Norway
+768	Barranquilla	Colombia
+769	Nahariya	Israel
+770	Tbilisi	Georgia
+771	Basel	Switzerland
+772	Phuket	Thailand
+773	Karlsruhe	Germany
+775	Utrecht	Netherlands
+776	Dollard-des Ormeaux	Quebec Canada
+777	Kiryat Malachi	Israel
+778	Nicosia	Cyprus
+779	Limassol	Cyprus
+780	Paphos	Cyprus
+781	Kyrenia	Cyprus
+782	Ayia Napa	Cyprus
+783	Na'ale	Israel
+784	Port Elizabeth	South Africa
+785	Oudtshoorn	South Africa
+787	Shenzhen	China
+788	Porto	Portugal
+789	Rostov-on-Don	Russia
+790	Chelyabinsk	Russia
+791	Krasnodar	Russia
+792	Luang Prabang	Laos
+793	Antibes	France
+794	Simferopol	Crimea
+795	Potsdam	Germany
+796	Suva	Fiji
+798	Christchurch	New Zealand
+799	Queenstown	New Zealand
+800	Dunedin	New Zealand
+801	Uman	Ukraine
+802	Balfurya	Israel
+803	Afula	Israel
+804	Villiers-sur-Marne	France
+805	Bimini	Bahamas
+806	Burgas	Bulgaria
+807	Vidin	Bulgaria
+808	Dupnitsa	Bulgaria
+809	Kyustendil	Bulgaria
+810	Plovdiv	Bulgaria
+811	Pazardzhik	Bulgaria
+812	Pleven	Bulgaria
+813	Rousse	Bulgaria
+814	Stara Zagora	Bulgaria
+815	Haskovo	Bulgaria
+816	Yambol	Bulgaria
+818	Punta del Este	Uruguay
+819	Colonia del Sacramento	Uruguay
+820	Paysandú	Uruguay
+821	Rivera	Uruguay
+822	Florida	Uruguay
+823	Ulm	Germany
+824	Launceston	Tasmania Australia
+828	Byron Bay	New South Wales Australia
+829	Providenciales	Turks and Caicos Islands
+830	Grand Turk Island	Turks and Caicos Islands
+831	Antigua	Antigua and Barbuda
+839	Iqaluit	Nunavut Canada
+840	Piestany	Slovakia
+841	Meitar	Israel
+842	Netivot	Israel
+843	Dimona	Israel
+851	Holon	Israel
+852	Petah Tikva	Israel
+864	Sukhumi	Georgia
+865	Novorossiysk	Russia
+866	Zhytomyr	Ukraine
+867	Ramat Yishai	Israel
+868	Lehavim	Israel
+869	Gedera	Israel
+870	La Romana	Dominican Republic
+871	Kiryat Shmona	Israel
+872	Lugano	Switzerland
+873	Murmansk	Russia
+874	Dubai	Dubai United Arab Emirates
+875	Kfar Saba	Israel
+876	St. Tropez	France
+877	El'ad	Israel
+878	Stavropol	Russia
+879	Caen	France
+880	Deauville	France
+881	Le Havre	France
+882	Bukhara	Uzbekistan
+883	Samarkand	Uzbekistan
+888	Taipei City	Taiwan
+889	Waterloo	Ontario Canada
+890	Willemstad	Curaçao
+891	La Baule-Escoublac	France
+892	Mendoza	Mendoza Argentina
+893	Ramla	Israel
+894	Kostroma	Russia
+895	Olbia	Italy
+896	Watford	England
+900	Ulyanovsk	Russia
+901	Izhevsk	Russia
+902	Khabarovsk	Russia
+903	Orenburg	Russia
+904	Astrakhan	Russia
+905	Lipetsk	Russia
+906	Tomsk	Russia
+907	Bryansk	Russia
+911	Nalchik	Russia
+912	Dzerzhinsk	Russia
+913	Veliky Novgorod	Russia
+914	Derbent	Russia
+915	Birobidzhan	Russia
+916	Barnaul	Russia
+917	Ryazan	Russia
+919	Novosibirsk	Russia
+922	Samara	Russia
+923	Omsk	Russia
+924	Kazan	Russia
+925	Ufa	Russia
+926	Volgograd	Russia
+927	Perm	Russia
+928	Krasnoyarsk	Russia
+929	Fort-de-France	Martinique
+930	Kharkiv	Ukraine
+931	Skopje	Macedonia
+932	Dili	Timor-Leste
+935	Rhodes	Greece
+936	Heraklion	Greece
+937	Ra'anana	Israel
+938	Kendal	England
+939	Canberra	Australian Capital Territory Australia
+940	Maple	Ontario Canada
+941	Curitiba	Brazil
+942	Salta	Salta Argentina
+943	Cusco	Peru
+946	Kochubeyevskoye	Russia
+947	Mariupol	Ukraine
+948	Grenoble	France
+949	Khmelnytskyi	Ukraine
+950	Nelson	New Zealand
+951	Surat	India
+952	Kfar Warburg	Israel
+953	Belo Horizonte	Brazil
+954	Omer	Israel
+955	Chernigov	Ukraine
+956	Montpellier	France
+957	Cabo San Lucas	Mexico
+958	Mogilev	Belarus
+959	Yiwu	China
+960	Ézanville	France
+961	Togliatti	Russia
+962	Tahiti	French Polynesia
+963	Shlomi	Israel
+964	Ariel	Israel
+965	Beit She'an	Israel
+966	Banff	Alberta Canada
+967	Lake Louise	Alberta Canada
+968	Jasper	Alberta Canada
+969	Airdrie	Alberta Canada
+970	Medicine Hat	Alberta Canada
+971	Wetaskiwin	Alberta Canada
+972	Red Deer	Alberta Canada
+973	Canmore	Alberta Canada
+974	Fort McMurray	Alberta Canada
+975	Grande Prairie	Alberta Canada
+976	Pincher Creek	Alberta Canada
+977	Cork	Ireland
+978	Thessaloniki	Greece
+979	Elon Moreh	Israel
+980	Beit Aryeh-Ofarim	Israel
+981	Herzliya	Israel
+982	Beitar Illit	Israel
+983	Conakry	Guinea
+987	Kochi	India
+988	Kadima-Zoran	Israel
+989	Dniprodzerzhynsk	Ukraine
+990	Tamale	Ghana
+991	Kirkland	Quebec Canada
+992	Rarotonga	Cook Islands
+993	Lublin	Poland
+994	Poznań	Poland
+995	Arequipa	Peru
+996	Ica	Peru
+999	Ajaccio	France
+1000	Caesarea	Israel
+1001	Cozumel	Mexico
+1002	Basingstoke	England
+1003	Surrey	British Columbia Canada
+1004	Playa del Carmen	Mexico
+1005	Botley	England
+1006	Hashmonaim	Israel
+1007	Kaifeng	China
+1010	Castries	S. Lucia
+1011	Ciudad Juárez	Mexico
+1012	Donetsk	Ukraine
+1023	Arvika	Sweden
+1024	Summerside	Prince Edward Island Canada
+1025	Charlottetown	Prince Edward Island Canada
+1048	Sutton	Quebec Canada
+1050	Siem Reap	Cambodia
+1074	Maribor	Slovenia
+1075	Corfu	Greece
+1076	Cagliari	Italy
+1077	Douglas	Isle of Man
+1099	Uzhgorod	Ukraine
+1100	Mukacheve	Ukraine
+1124	Chevilly Larue	France
+1125	Choisy-le-Roi	France
+1126	Clamart	France
+1149	Montreuil	France
+1150	Montrouge	France
+1151	Nanterre	France
+1173	Soisy-Sous-Montmorency	France
+1174	St Ouen	France
+1175	St-Brice-Sous-Forêt	France
+1176	St-Cloud	France
+1221	Edgbaston	England
+1233	Richmond-upon Thames	England
+1234	Salford	England
+1235	Southampton	England
+1256	Bilhorod-Dnistrovskyi	Ukraine
+1257	La Plata	Buenos Aires Argentina
+1258	Martinez	Buenos Aires Argentina
+1280	Malvern East	Victoria Australia
+1281	Moorabbin	Victoria Australia
+1303	La Minerve	Quebec Canada
+1305	Napierville	Quebec Canada
+1332	Trieste	Italy
+1333	Valenza	Italy
+1334	Karaganda	Kazakhstan
+1357	Chêne-Bougeries	Switzerland
+1358	Zug	Switzerland
+1359	Nonthaburi	Thailand
+1381	Wyoming	New South Wales Australia
+1382	Nowra	New South Wales Australia
+1391	Freiburg im Breisgau	Germany
+1392	Bad Nenndorf	Germany
+1403	Tung Chung	Hong Kong China
+1404	Ancón	Peru
+1426	Dhaka	Bangladesh
+1427	Dodoma	Tanzania
+1428	Dushanbe	Tajikistan
+1450	Maseru	Lesotho
+1451	King Edward Point	S. Georgia & S. Sandwich Is.
+1452	Kingstown	St. Vincent & the Grenadines
+1474	Messina	Italy
+1475	Nelson	British Columbia Canada
+1476	Punta Cana	Dominican Republic
+1498	Antigua	Guatemala
+1515	Coffs Harbour	New South Wales Australia
+1516	Lipson	South Australia Australia
+1517	Podgorica	Montenegro
+1518	Kotor	Montenegro
+1519	Tivat	Montenegro
+1520	Budva	Montenegro
+1521	Bar	Montenegro
+1522	Bijelo Polje	Montenegro
+1523	Niksic	Montenegro
+1524	Herceg Novi	Montenegro
+1525	Cetinje	Montenegro
+1526	Kolasin	Montenegro
+1527	Zabljak	Montenegro
+1529	Dubrovnik	Croatia
+1530	Pristina	Kosovo
+1531	Mostar	Bosnia
+1532	Caxias do Sul	Brazil
+1533	Oldham	Greater Manchester England
+1534	Kervansaray	North Cyprus
+1535	Hoi An	Vietnam
+1536	Danang	Vietnam
+1537	Granada	Spain
+1538	Bilbao	Spain
+1539	Mistissini	Quebec Canada
+1540	Anzio	Italy
+1541	Bologna	Italy
+1542	Fregene	Italy
+1543	Santa Marinella	Italy
+1544	Milano Marittima	Italy
+1545	Forte Dei Marmi	Italy
+1546	Kvutzat Kinneret	Israel
+1547	Naypyidaw	Myanmar
+1548	Kalaw	Myanmar
+1557	Kaleen	Australian Capital Territory Australia
+1558	Darwin	Northern Territory Australia
+1576	Kingston	Western Australia Australia
+1577	Busselton	Western Australia Australia
+1578	Margaret River	Western Australia Australia
+1601	Gilat	Israel
+1602	Dingley Village	Victoria Australia
+1613	Queanbeyan	New South Wales Australia
+1614	Karramomus	Victoria Australia
+1627	Falmouth	Jamaica
+1628	Mandavile	Jamaica
+1629	Black River	Jamaica
+1652	Cornwall	Ontario Canada
+1653	Lviv	Ukraine
+1677	Yokne'am Illit	Israel
+1678	Tirat Karmel	Israel
+1679	Nesher	Israel
+1703	Beit El	Israel
+1704	Sha'are Tikva	Israel
+1705	Tzur Yitzhak	Israel
+1706	Pardesiya	Israel
+1739	Shimshit	Israel
+1740	El'azar	Israel
+1741	Ganne Modi'in	Israel
+1766	Giv'at Avni	Israel
+1767	Nordiya	Israel
+1768	Pedu'el	Israel
+1769	Ma'agan Micha'el	Israel
+1791	Kfar Hess	Israel
+1792	Beit El'azari	Israel
+1793	Kedar	Israel
+1824	Almon	Israel
+1825	Dolev	Israel
+1856	Bnei Deror	Israel
+1857	Mesilat Zion	Israel
+1858	Kfar HaNagid	Israel
+1859	Kfar Netter	Israel
+1892	Shavei Tzion	Israel
+1893	Ma'ale Efrayim	Israel
+1928	Harduf	Israel
+1929	Otni'el	Israel
+1930	Kabri	Israel
+1931	Kochav Micha'el	Israel
+1963	Ge'alya	Israel
+1964	Kevuzat Yavne	Israel
+1965	Gan Yoshiya	Israel
+2000	Yanuv	Israel
+2001	Negba	Israel
+2031	Elyakim	Israel
+2032	Nirit	Israel
+2033	Ginaton	Israel
+2049	Ma'as	Israel
+2050	Enav	Israel
+2063	Beit HaGadi	Israel
+2064	Tene	Israel
+2072	HaZorea	Israel
+2081	Neve Michael	Israel
+2082	Pedaya	Israel
+2094	Shomria	Israel
+2095	Yaziz	Israel
+2110	Rehelim	Israel
+2111	Beit Rimon	Israel
+2114	Kfar Hoshen	Israel
+2115	Keshet	Israel
+2125	HaGosherim	Israel
+2126	Zikim	Israel
+2130	Midrach Oz	Israel
+2135	Bat Hadar	Israel
+2136	Mizra	Israel
+2141	Amka	Israel
+2147	Kfar Blum	Israel
+2148	Kerem Maharal	Israel
+2151	Ma'anit	Israel
+2153	Bekoa	Israel
+2154	Arbel	Israel
+2161	Ma'yan Zevi	Israel
+2167	Hefzi-Bah	Israel
+2168	Avnei Etan	Israel
+2172	Alma	Israel
+2175	Yachini	Israel
+2176	Shim'a	Israel
+2177	HaYogev	Israel
+2185	Misgav Dov	Israel
+2186	Ein Yahav	Israel
+2187	Sde Nahum	Israel
+2200	Nir David (Tel Amal)	Israel
+2201	Ya'ad	Israel
+2202	Ga'ton	Israel
+2226	Beit Alfa	Israel
+2227	Degania Bet	Israel
+2228	Avdon	Israel
+2258	Kfar Hayim	Israel
+2259	Irus	Israel
+2260	Neta'im	Israel
+2293	Hafez Hayim	Israel
+2294	Hazeva	Israel
+2295	Amir	Israel
+2321	Asherat	Israel
+2322	Berosh	Israel
+2328	Ma'ale Amos	Israel
+2329	Neta	Israel
+2335	Gal'on	Israel
+2336	Ahuzam	Israel
+2343	Aniam	Israel
+2344	Gelil Yam	Israel
+2345	Hodiya	Israel
+2346	Eyal	Israel
+2348	Naham	Israel
+2351	Peki'in Hadasha	Israel
+2353	Alumim	Israel
+2361	Talmei Bilu	Israel
+2362	Yiftah	Israel
+2363	Kerem Yavne (Yeshiva)	Israel
+2369	Shoshanat HaAmakim	Israel
+2370	Magen	Israel
+2372	Shorashim	Israel
+2374	Retamim	Israel
+2375	Kfar Rupin	Israel
+2379	Tefahot	Israel
+2382	Michmanim	Israel
+2383	Mavki'im	Israel
+2389	Ma'oz Hayim	Israel
+2394	Nezer Hazzani	Israel
+2395	Shekef	Israel
+2400	Mitspe Ilan	Israel
+2403	Mahseya	Israel
+2404	Meitav	Israel
+2405	Gid'ona	Israel
+2406	Sde Terumot	Israel
+2407	Avtalyon	Israel
+2408	Gevar'am	Israel
+2410	Yated	Israel
+2411	Moran	Israel
+2414	Beit Oren	Israel
+2416	Te'ashur	Israel
+2417	Karmel	Israel
+2418	Adora	Israel
+2420	Zohar	Israel
+2421	Zeru'a	Israel
+2422	Nataf	Israel
+2425	Ami'ad	Israel
+2426	Kidmat Zevi	Israel
+2427	Ketura	Israel
+2428	Eliav	Israel
+2429	Dor	Israel
+2430	Zofar	Israel
+2431	Mevo Hama	Israel
+2432	Ze'elim	Israel
+2433	Beit Guvrin	Israel
+2434	Mivtahim	Israel
+2435	Goren	Israel
+2436	Shefer	Israel
+2438	Be'erot Yitzhak	Israel
+2439	Kfar Haruv	Israel
+2440	Mesilot	Israel
+2441	Kahal	Israel
+2442	Mashabei Sadeh	Israel
+2443	Kiryat Anavim	Israel
+2444	Daverat	Israel
+2445	Uza	Israel
+2446	Barak	Israel
+2447	Kesalon	Israel
+2449	Giv'at Shapira	Israel
+2450	Rehov	Israel
+2452	Malkiya	Israel
+2454	Alumot	Israel
+2455	Gesher	Israel
+2456	Mevo'ot Yam	Israel
+2457	Bat Hen	Israel
+2458	Mevo Dotan	Israel
+2459	Yesha	Israel
+2460	Margaliyot	Israel
+2461	Nahshonim	Israel
+2464	Gadot	Israel
+2467	Beit Yanai	Israel
+2468	Sasa	Israel
+2470	Eli-Ad	Israel
+2472	Giv'olim	Israel
+2473	Gadish	Israel
+2475	Idan	Israel
+2477	Mele'a	Israel
+2478	Nitzanim	Israel
+2479	Nir Oz	Israel
+2480	Yardena	Israel
+2481	Kfar HaMaccabi	Israel
+2483	Yarkona	Israel
+2486	Karmei Katif	Israel
+2487	Giv'at Hen	Israel
+2490	Poriya-Kfar Avoda	Israel
+2491	Gonen	Israel
+2492	Zohar	Israel
+2493	Ma'agan	Israel
+2494	Hamadya	Israel
+2495	Negohot	Israel
+2496	Nes Amim	Israel
+2497	Sde Avraham	Israel
+2498	Mei Ami	Israel
+2501	Massada	Israel
+2503	HaBonim	Israel
+2508	Dishon	Israel
+2509	Ortal	Israel
+2512	Kfar Maimon	Israel
+2514	Melilot	Israel
+2515	Shomera	Israel
+2516	Dekel	Israel
+2520	Tzuri'el	Israel
+2521	Sde Nitzan	Israel
+2523	Ein Zivan	Israel
+2528	Ganei Hadar	Israel
+2529	Kfar Glikson	Israel
+2530	Sharsheret	Israel
+2545	Misgav Am	Israel
+2546	Netu'a	Israel
+2554	Afik	Israel
+2562	Adirim	Israel
+2563	Hemdat	Israel
+2564	Neve Etan	Israel
+2583	Peri Gan	Israel
+2584	Ganei Am	Israel
+2585	Kfar Rut	Israel
+2609	Mattat	Israel
+2610	Me'ir Shefeya	Israel
+2611	Avenat	Israel
+2636	Arsuf	Israel
+2637	Beit Berl	Israel
+2638	Yad HaShmona	Israel
+2682	Ancona	Italy
+2683	Victoria	Seychelles
+2684	Alicante	Spain
+2685	Nouakchott	Mauritania
+2695	Tampere	Finland
+2696	Oulu	Finland
+2723	Iași	Romania
+2724	Santa Teresa	Costa Rica
+2725	Mullumbimby	New South Wales Australia
+2756	Ville-d'Avray	France
+2757	Vincennes	France
+2758	Aachen	Germany
+2759	Hersonissos	Greece
+2786	Achziv	Israel
+2787	Einav	Israel
+2836	Cabarete	Dominican Republic
+2837	Puerto Plata	Dominican Republic
+2838	Visakhapatnam	Andhra Pradesh India
+2865	Waterton Park	Alberta Canada
+2866	Coquitlam	British Columbia Canada
+2867	Andria	Italy

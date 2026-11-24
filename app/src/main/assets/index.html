@@ -33,13 +33,16 @@
   }
 
   /* ---------- header ---------- */
+  [hidden] { display: none !important; }
   header.top {
     position: sticky; top: 0; z-index: 5;
     padding: calc(var(--safe-top) + 14px) 16px 12px;
     background: linear-gradient(180deg, rgba(18, 13, 24, .96) 60%, rgba(18, 13, 24, 0));
     transform: translateZ(0);
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
   }
+  #tzNote { flex-basis: 100%; margin: -4px 0 0; font-size: 11.5px; line-height: 1.35; color: var(--mute); }
+  #tzNote[hidden] { display: none; }
   h1 {
     margin: 0; font-family: var(--serif); font-weight: 600; font-size: 24px; letter-spacing: .2px;
     display: flex; align-items: center; gap: 10px;
@@ -192,7 +195,7 @@
     content: ""; position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 7px); border-radius: 12px;
     background: linear-gradient(90deg, var(--amber-deep), var(--amber)); transition: transform .3s cubic-bezier(.2, .8, .2, 1);
   }
-  .seg[data-on="hebcal"]::before { transform: translateX(calc(100% + 6px)); }
+  .seg[data-on="hebcal"]::before, .seg[data-on="18"]::before { transform: translateX(calc(100% + 6px)); }
   .seg button { position: relative; z-index: 1; padding: 13px 8px; border: 0; border-radius: 12px; background: transparent; color: var(--mute); font: 600 14px var(--sans); }
   .seg button.on { color: #2a1500; }
   #zipMsg { margin: 6px 6px 0; min-height: 18px; font-size: 12.5px; color: #ff9d8a; }
@@ -219,6 +222,7 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
     <span id="placeText">Locating…</span>
   </button>
+  <div id="tzNote" hidden></div>
 </header>
 
 <main>
@@ -236,10 +240,18 @@
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-label="Location">
   <h3>Settings</h3>
-  <h4 style="margin-top:4px">Times from</h4>
+  <h4 style="margin-top:4px" id="srcHead">Times from</h4>
+  <div class="hint" id="srcNote" hidden>Chabad.org has no listing for this place, so the times come from Hebcal.</div>
   <div class="seg" id="seg">
     <button data-src="chabad">Chabad.org</button>
     <button data-src="hebcal">Hebcal zmanim</button>
+  </div>
+  <div id="jlmBox" hidden>
+    <h4>Jerusalem candle lighting</h4>
+    <div class="seg" id="jlmSeg">
+      <button data-m="40">40 min before sunset</button>
+      <button data-m="18">18 min before sunset</button>
+    </div>
   </div>
   <h4>Location</h4>
   <div id="opts"></div>
@@ -269,12 +281,13 @@ if (!window.Android) {
   const t0 = new Date(); const today = new Date(t0.getFullYear(), t0.getMonth(), t0.getDate(), 12);
   const nextFri = new Date(today); nextFri.setDate(today.getDate() + ((5 - today.getDay() + 7) % 7));
   window.Android = {
-    info: () => JSON.stringify({ src: window.__mock.src, place: window.__mock.place, manual: window.__mock.manual, zip: window.__mock.zip, saved: window.__mock.saved, today: iso(today), target: iso(nextFri) }),
+    info: () => JSON.stringify({ jlm: !!window.__mock.jlm, jlm40: window.__mock.jlm40 !== false, src: window.__mock.src, place: window.__mock.place, manual: window.__mock.manual, zip: window.__mock.zip, saved: window.__mock.saved, today: iso(today), target: iso(nextFri) }),
     refreshLocation: () => {},
     sheet: () => {},
     version: () => '1.0.3',
     checkUpdate: () => setTimeout(() => window.__update({ state: 'available', current: '1.0.3', latest: '1.0.4', url: 'https://github.com/DanielCohen002/licht/releases/latest' }), 400),
     openUrl: () => {},
+    setJlm40: v => { window.__mock.jlm40 = v; setTimeout(() => window.__reload(), 100); },
     setSource: v => { window.__mock.src = v; setTimeout(() => window.__reload(), 100); },
     choose: (zip, label) => { window.__mock.manual = true; window.__mock.zip = zip; window.__mock.place = label; setTimeout(() => { window.__place(label); window.__reload(); }, 200); },
     useLocal: () => { window.__mock.manual = false; window.__mock.zip = '10001'; window.__mock.place = 'New York, NY 10001'; setTimeout(() => { window.__place('New York, NY 10001'); window.__reload(); }, 200); },
@@ -283,6 +296,7 @@ if (!window.Android) {
       { name: 'Springfield', state: 'Illinois', lat: 39.80, lon: -89.64, zips: ['62701'] },
       { name: 'Springfield', state: 'Missouri', lat: 37.21, lon: -93.29, zips: [] },
       { name: 'Springfield', state: 'Massachusetts', lat: 42.10, lon: -72.59, zips: ['01103', '01104'] }]), 300),
+    pickWorld: () => {},
     pick: () => setTimeout(() => { window.__mock.saved.push({ zip: '62701', label: 'Springfield, IL 62701', lat: 39.8, lon: -89.6 }); window.Android.choose('62701', 'Springfield, IL 62701'); }, 300),
     remove: z => { window.__mock.saved = window.__mock.saved.filter(x => x.zip !== z); setTimeout(() => window.__refreshSheet(), 50); },
     week: (i, id) => setTimeout(() => {
@@ -327,7 +341,11 @@ window.__week = (id, w) => {
 window.__place = p => { info.place = p; setPlace(p); $('#place').classList.remove('spin'); };
 window.__reload = () => { data.clear(); asked.clear(); ids.clear(); info = JSON.parse(A.info()); init(); };
 
-function setPlace(p) { $('#placeText').textContent = p || 'Set location'; }
+function setPlace(p) {
+  $('#placeText').textContent = p || 'Set location';
+  let n = ''; try { n = JSON.parse(A.info()).tzNote || ''; } catch (e) {}
+  const t = $('#tzNote'); t.textContent = n; t.hidden = !n;
+}
 
 function request(iso) {
   if (data.has(iso) || asked.has(iso)) return;
@@ -475,8 +493,14 @@ function optHtml(kind, o, on, title, sub, extra) {
 }
 function renderSheet() {
   info = JSON.parse(A.info());
+  const noCh = info.chabad === false;
+  $('#seg').hidden = noCh; $('#srcNote').hidden = !noCh;
   $('#seg').dataset.on = info.src || 'chabad';
   document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.src === (info.src || 'chabad')));
+  $('#jlmBox').hidden = !info.jlm;
+  const jm = info.jlm40 === false ? '18' : '40';
+  $('#jlmSeg').dataset.on = jm;
+  document.querySelectorAll('#jlmSeg button').forEach(b => b.classList.toggle('on', b.dataset.m === jm));
   const saved = info.saved || [];
   let h = optHtml('auto', { zip: '' }, !info.manual, 'My location', info.manual ? 'Follows your phone' : 'Follows your phone · ' + info.place);
   if (saved.length) {
@@ -495,7 +519,7 @@ function renderSheet() {
 }
 function renderResults() {
   $('#results').innerHTML = results.map((r, i) =>
-    optHtml('result', {}, false, `${r.name}, ${r.state}`, r.zips.length ? 'ZIP ' + r.zips[0] : 'Find ZIP', `data-i="${i}"`)).join('');
+    optHtml('result', {}, false, `${r.name}, ${r.state}`, r.cc !== 'US' ? (r.cid || r.zips.length ? 'Chabad.org or Hebcal times' : 'Hebcal times only') : r.zips.length ? 'ZIP ' + r.zips[0] : 'Find ZIP', `data-i="${i}"`)).join('');
 }
 function openSheet() { confirmZip = null; results = []; $('#results').innerHTML = ''; $('#zipMsg').textContent = ''; $('#zipIn').value = ''; resetUpdate(); renderSheet(); scrim.classList.add('show'); sheet.classList.add('show'); A.sheet(true); }
 function resetUpdate() {
@@ -520,6 +544,7 @@ window.__refreshSheet = () => { confirmZip = null; if (sheet.classList.contains(
 $('#zipIn').addEventListener('focus', () => setTimeout(() => $('#zipIn').scrollIntoView({ block: 'center', behavior: 'smooth' }), 350));
 $('#place').onclick = openSheet;
 $('#seg').onclick = e => { const b = e.target.closest('button'); if (!b || b.dataset.src === (info.src || 'chabad')) return; closeSheet(); A.setSource(b.dataset.src); };
+$('#jlmSeg').onclick = e => { const b = e.target.closest('button'); if (!b || b.dataset.m === (info.jlm40 === false ? '18' : '40')) return; closeSheet(); A.setJlm40(b.dataset.m === '40'); };
 scrim.onclick = closeSheet;
 
 /* hold a saved place to ask about removing it */
@@ -549,13 +574,15 @@ opts.onclick = e => {
   if (b.dataset.kind === 'auto') { $('#place').classList.add('spin'); closeSheet(); A.useLocal(); setTimeout(() => $('#place').classList.remove('spin'), 6000); return; }
   const src = (info.saved || []).find(p => p.zip === b.dataset.zip);
   if (!src) return;
-  closeSheet(); A.choose(src.zip, src.label, src.lat, src.lon);
+  closeSheet(); A.choose(src.zip, src.label, src.lat, src.lon, src.cc || 'US', src.tz || '', src.cid || 0);
 };
 
 $('#results').onclick = e => {
   const b = e.target.closest('.opt'); if (!b) return;
   const r = results[+b.dataset.i]; if (!r) return;
-  $('#zipMsg').style.color = 'var(--mute)'; $('#zipMsg').textContent = 'Checking with Chabad.org…';
+  $('#zipMsg').style.color = 'var(--mute)';
+  if (r.cc && r.cc !== 'US') { $('#zipMsg').textContent = 'Setting up…'; A.pickWorld(String(r.geo), `${r.name}, ${r.state}`, r.lat, r.lon, r.cc, r.tz || '', r.cid || 0); return; }
+  $('#zipMsg').textContent = 'Checking with Chabad.org…';
   A.pick(r.lat, r.lon, r.zips.join(','));
 };
 
@@ -575,8 +602,8 @@ window.__results = (id, list) => {
   if (id !== searchId) return;
   const msg = $('#zipMsg');
   if (!list) { msg.style.color = '#ff9d8a'; msg.textContent = "Couldn't search. Check your connection."; return; }
-  if (!list.length) { msg.style.color = '#ff9d8a'; msg.textContent = 'No US place found by that name.'; return; }
-  msg.textContent = 'US places only (Chabad.org times use ZIP codes).';
+  if (!list.length) { msg.style.color = '#ff9d8a'; msg.textContent = 'No place found by that name.'; return; }
+  msg.textContent = 'ZIP codes are US only. Other cities use Chabad.org when it lists them, otherwise Hebcal.';
   results = list; renderResults();
 };
 window.__zipError = () => {
