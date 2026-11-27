@@ -1,8 +1,16 @@
-<p align="center"><img src="docs/icon.png" alt="Licht icon" width="128"></p>
+<p align="center">
+  <img src="docs/icon.png" alt="Licht icon" width="128" height="128">
+</p>
 
 <h1 align="center">Licht</h1>
 
 Android app with a Quick Settings tile that shows the next Shabbos candle lighting and when Shabbos ends, plus a page of past and future weeks.
+
+### [Download the latest signed APK](https://github.com/DanielCohen002/licht/releases/latest)
+
+Package name `com.djcohen.licht`. Needs Android 11 or newer.
+
+What it does:
 
 - **Tile:** "Candles 4:22 / Ends Sat 5:22" for the nearest upcoming Friday and Saturday. It moves to the next week once Shabbos ends. Tap it to open the page.
 - **Mini tile:** "Licht mini" is a second tile for the half-size slot (Android 17 lets a tile take half the width). A half-size tile shows only its icon, so Licht mini draws the two times in the icon. If you stretch it to full size it says "Use Licht tile for full size". Android doesn't tell an app which size a tile is, so this is two tiles instead of one that switches.
@@ -16,7 +24,7 @@ ZIP codes are US only.
 
 ## Install
 
-Download the APK from the [Releases](../../releases) page and install it. Then add the tile: swipe down twice, tap the pencil, and drag "Licht" (full size) or "Licht mini" (half size) into your tiles.
+Download the APK from the [Releases](../../releases/latest) page and install it. Then add the tile: swipe down twice, tap the pencil, and drag "Licht" (full size) or "Licht mini" (half size) into your tiles.
 
 ## Build
 
